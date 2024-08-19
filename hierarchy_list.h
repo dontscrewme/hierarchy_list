@@ -1,6 +1,8 @@
 #ifndef HIERARCHY_LIST_H
 #define HIERARCHY_LIST_H
 
+void hierarchy_list_set_error_callback(int (*errback)(const char *, ...));
+
 #include "list.h"
 
 struct parent {
@@ -33,10 +35,8 @@ void unset_child(struct parent *parent, const char *key, const char *value);
 
 int num_of_children(struct parent *parent, unsigned int *output);
 
-void hierarchy_list_set_error_callback(int (*errback)(const char *, ...));
-
 void print_all(struct list_head *parent_head);
 void print_parents(struct list_head *parent_head);
-void print_children(struct parent *current_parent);
+void print_children(struct parent *parent);
 
 #endif
