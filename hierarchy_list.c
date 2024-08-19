@@ -302,21 +302,21 @@ void print_parents(struct list_head *parent_head) {
   printf("\n");
 }
 
-void print_children(struct parent *current_parent) {
-  if (!current_parent) {
+void print_children(struct parent *parent) {
+  if (!parent) {
     error_callback("%s: invalid input\n", __func__);
   }
 
-  printf("Parent(%s=%s) : ", current_parent->key, current_parent->value);
+  printf("Parent(%s=%s) : ", parent->key, parent->value);
 
-  struct list_head *child_head = &current_parent->child_head;
+  struct list_head *child_head = &parent->child_head;
   if (list_empty(child_head)) {
     error_callback("no child\n");
     return;
   }
 
   struct child *current_child;
-  list_for_each_entry(current_child, &current_parent->child_head, list) {
+  list_for_each_entry(current_child, &parent->child_head, list) {
     printf("Child(%s=%s) -> ", current_child->key, current_child->value);
     
   }
