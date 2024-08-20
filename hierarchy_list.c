@@ -1,7 +1,7 @@
 #include "hierarchy_list.h"
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
 
 static int default_error_callback(const char *format, ...) {
   int ret;
@@ -21,10 +21,6 @@ void hierarchy_list_set_error_callback(int (*errback)(const char *, ...)) {
 }
 
 static struct parent *init_parent(const char *key, const char *value) {
-  if (!key || !value) {
-    error_callback("%s: invalid input\n", __func__);
-    return NULL;
-  }
 
   struct parent *parent = (struct parent *)malloc(sizeof(struct parent));
   if (!parent) {
@@ -51,10 +47,6 @@ static struct parent *init_parent(const char *key, const char *value) {
 }
 
 static struct child *init_child(const char *key, const char *value) {
-  if (!key || !value) {
-    error_callback("%s: invalid input\n", __func__);
-    return NULL;
-  }
 
   struct child *child = (struct child *)malloc(sizeof(struct child));
   if (!child) {
@@ -80,10 +72,6 @@ static struct child *init_child(const char *key, const char *value) {
 }
 
 static void add_parent(struct parent *parent, struct list_head *head) {
-  if (!parent || !head) {
-    error_callback("%s: invalid input\n", __func__);
-    return;
-  }
 
   if (!list_empty(&parent->list)) {
     error_callback("%s: parent already in a list\n", __func__);
@@ -94,10 +82,6 @@ static void add_parent(struct parent *parent, struct list_head *head) {
 }
 
 static void add_child(struct child *child, struct list_head *head) {
-  if (!child || !head) {
-    error_callback("%s: invalid input\n", __func__);
-    return;
-  }
 
   if (!list_empty(&child->list)) {
     error_callback("%s: child already in a list\n", __func__);
@@ -207,15 +191,15 @@ struct child *set_child(struct parent *parent, const char *key,
   return child;
 }
 
-struct child *find_child(struct parent* parent, const char *key,
+struct child *find_child(struct parent *parent, const char *key,
                          const char *value) {
 
   if (!parent || !key || !value) {
     error_callback("%s: invalid input\n", __func__);
     return NULL;
   }
-  
-  struct list_head* child_head = &parent->child_head;
+
+  struct list_head *child_head = &parent->child_head;
 
   struct child *current_child;
   list_for_each_entry(current_child, child_head, list) {
@@ -318,7 +302,6 @@ void print_children(struct parent *parent) {
   struct child *current_child;
   list_for_each_entry(current_child, &parent->child_head, list) {
     printf("Child(%s=%s) -> ", current_child->key, current_child->value);
-    
   }
   printf("\n");
 }
