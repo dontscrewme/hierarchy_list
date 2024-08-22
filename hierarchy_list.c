@@ -240,7 +240,7 @@ void unset_children(struct parent *parent) {
   }
 }
 
-int num_of_children(struct parent *parent, unsigned int *output) {
+int getNumOfChildren(struct parent *parent, unsigned int *output) {
   if (!parent) {
     error_callback("%s: invalid input\n", __func__);
     return -1;
