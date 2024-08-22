@@ -88,7 +88,7 @@ void test_num_of_children() {
   set_child(p, "key2", "value2");
   set_child(p, "key3", "value3");
   unsigned int count;
-  int result = num_of_children(p, &count);
+  int result = getNumOfChildren(p, &count);
   assert(result == 0);
   assert(count == 2);
   unset_parents(&parent_head); // Clean up memory
