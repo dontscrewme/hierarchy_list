@@ -33,7 +33,7 @@ struct child *find_child(struct parent *parent, const char *key,
 void unset_children(struct parent *parent);
 void unset_child(struct parent *parent, const char *key, const char *value);
 
-int num_of_children(struct parent *parent, unsigned int *output);
+int getNumOfChildren(struct parent *parent, unsigned int *output);
 
 void print_all(struct list_head *parent_head);
 void print_parents(struct list_head *parent_head);
